@@ -1,0 +1,13 @@
+<div id="container">
+    <h2>Hi @<%= username %>!</h2>
+    <ul>
+        <% tweets.forEach((tweet) => { %>
+            <li>
+            <%= tweet.username %>
+            <br>
+            <br>
+            <%= tweet.tweet %>
+            </li>
+        <%  }) %>
+     </ul>
+   </div>
