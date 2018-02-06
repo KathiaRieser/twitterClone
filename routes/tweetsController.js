@@ -4,7 +4,6 @@ const User = require('../models/User');
 const Tweet = require('../models/Tweet');
 
 tweetsController.get("/", (req, res, next) => {
-  console.log(req.user.username);
   Tweet.find({}).exec((err, tweets) => {
     res.render (
       "tweets/index",
@@ -16,17 +15,17 @@ tweetsController.get("/", (req, res, next) => {
 tweetsController.get("/new", (req, res, next) => {
   res.render("tweets/new",
     { username: req.user.username });
- });
- 
- tweetsController.post("/new", (req, res, next) => {
-  const user  = req.user;
- 
-  User.findOne({ username: user.username }).exec((err, user) => {
-    if (err) { return; }
+  });
+  tweetsController.post("/new", (req, res, next) => {
+    console.log("Entra" + req.user.username)
+    const user  = req.user;
+    
+    User.findOne({ username: user.username }).exec((err, user) => {
+      if (err) { return; }
  
     const newTweet = new Tweet({
       user_id:   user._id,
-      user_name: user.username,
+      username: user.username,
       tweet:     req.body.tweetText
     });
  
